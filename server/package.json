@@ -1,0 +1,31 @@
+{
+  "name": "simple-chat-server",
+  "version": "1.0.0",
+  "description": "Server for simple chat",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/app.js",
+    "startDataBase": "mongod",
+    "build": "tsc",
+    "devCompile": "tsc -w",
+    "devServer": "nodemon dist/app.js"
+  },
+  "author": "Yaroslav-Andrii",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^16.1.7",
+    "bcrypt": "^3.0.6",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.10",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/express": "^4.17.2",
+    "@types/joi": "^14.3.4",
+    "@types/jsonwebtoken": "^8.3.5",
+    "@types/mongoose": "^5.5.30",
+    "@types/socket.io": "^2.1.4"
+  }
+}
