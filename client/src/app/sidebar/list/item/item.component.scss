@@ -1,0 +1,26 @@
+.item {
+	height: 100%;
+	display: flex;
+	align-items: center;
+
+	.chat-name {
+		margin-bottom: 5px;
+		font-weight: bold;
+	}
+	img {
+		width: 50px;
+		height: 50px;
+		padding-right: 10px;
+		border-radius: 25px;
+	}
+	.last-message {
+		width: 150px;
+		padding: 5px;
+		overflow: hidden;
+		white-space: nowrap; 
+		text-overflow: ellipsis;
+	}
+}
+
+
+

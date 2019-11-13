@@ -1,0 +1,28 @@
+<div class="loggin">
+	<form>
+		<h2>Welcome</h2>
+
+		<div *ngIf="registration" class="more">
+			<input type="text" placeholder="Name">
+			<input type="file" placeholder="Avatar">
+		</div>
+
+		
+		<input type="email" placeholder="Email">
+		<input type="password" placeholder="Password">
+		
+		<div class="buttons" *ngIf="!registration">
+			<button>Log in</button>
+			<button (click)="registration = true">Sign in</button>
+		</div>
+		<div class="buttons" *ngIf="registration">
+			<button>Confirm</button>
+			<button 
+				class="back" 
+				(click)="registration = false"
+			>
+				🢨
+			</button>
+		</div>
+	</form>
+</div>

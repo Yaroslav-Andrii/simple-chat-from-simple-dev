@@ -1,0 +1,11 @@
+<div class='item'>
+	<img [src]="data.avatarUrl" alt="avatar" class="user-avatar">
+	<div>
+		<span class="chat-name">{{data.name}}</span>
+		<div class="last-message">
+			<span>{{data.lastMessage.from}}</span> :
+			<span>{{data.lastMessage.text}}</span>
+		</div>
+		<span class="status"></span>
+	</div>
+</div>

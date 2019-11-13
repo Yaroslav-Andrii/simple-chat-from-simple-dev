@@ -1,0 +1,22 @@
+<div class="messenger">
+	<div class="info">
+		<div class="status">
+			<span class="interlocutor-name">{{interlocutor.name}}</span><br>
+			<span class='online' *ngIf='interlocutor.status'>online</span>
+			<span class='offline' *ngIf='!interlocutor.status'>offline</span>
+		</div>
+		<input type="text" placeholder="search in chat...">
+	</div>
+	<ul *ngIf="interlocutor">
+		<li *ngFor='let message of messages'>
+			<app-message [data]='message'></app-message>
+		</li>
+	</ul>
+	<div 
+		*ngIf="interlocutor"
+		class="send-field"
+	>
+		<textarea placeholder="Enter your message..." rows='1'></textarea>
+		<button><img src="assets/1.png" width="38px"></button>
+	</div>
+</div>

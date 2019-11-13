@@ -1,0 +1,14 @@
+.sidebar {
+	display: flex;
+	height: 100%;
+	flex-flow: column nowrap;
+	width: 100%;
+}
+.app-sidebar-header {
+	box-sizing: border-box;
+	height: 60px;
+}
+.app-list{
+	flex-grow: 1;
+	height: 90vh;
+}

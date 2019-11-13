@@ -1,0 +1,10 @@
+<ul class="list">
+	<li 
+		[class.active]='active === friend.id'
+		(click)='active = friend.id'
+		
+		*ngFor="let friend of FrindsList" 
+	>
+		<app-item [data]='friend'></app-item>
+	</li>
+</ul>

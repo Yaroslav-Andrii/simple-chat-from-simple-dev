@@ -1,0 +1,31 @@
+$own-message: #007acc;
+$message: #007acc;
+
+.message {
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	float: left;
+	justify-content: center;
+	border-radius: 20px;
+	background-color: $message;
+	color: white;
+	
+
+	.text p{
+		word-wrap: break-word;
+		max-width: 55vw;
+	}
+
+	.date {
+		color: rgb(223, 223, 223);
+		margin-left: 5px;
+		align-self: flex-end;
+		font-size: .8em;
+	}
+
+	&.own {
+		float: right;
+		background-color: $own-message;
+	}
+}

@@ -1,4 +1,9 @@
-<div class='wrapper'>
-  <app-sidebar></app-sidebar>
-  <app-messages></app-messages>
+<div *ngIf='signedIn' class='wrapper'>
+  <app-sidebar class="app-sidebar"></app-sidebar>
+  <app-messenger-frame 
+    class="app-messenger-frame"
+  ></app-messenger-frame>
+</div>
+<div *ngIf='!signedIn'>
+  <app-loggin></app-loggin>
 </div>
