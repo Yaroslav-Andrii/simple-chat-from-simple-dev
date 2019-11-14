@@ -14,7 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^16.1.7",
-    "bcrypt": "^3.0.6",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.6-alpha.6",
     "jsonwebtoken": "^8.5.1",
@@ -22,9 +23,10 @@
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "@types/bcrypt": "^3.0.0",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/dotenv-safe": "^8.1.0",
     "@types/express": "^4.17.2",
-    "@types/joi": "^14.3.4",
+    "@types/hapi__joi": "^16.0.3",
     "@types/jsonwebtoken": "^8.3.5",
     "@types/mongoose": "^5.5.30",
     "@types/socket.io": "^2.1.4"

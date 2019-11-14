@@ -1,7 +1,11 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
+import UserModel from '../models/user.model';
+import User from '../interfaces/user.interface';
 
-const User = mongoose.model('User');
+export function getUserByEmail(email: string) {
+	return UserModel.findOne({ email });
+}
 
-export function getAllUsers() {
-	return User.find();
+export function createUser(newUser: User) {
+	return UserModel.create(newUser);
 }

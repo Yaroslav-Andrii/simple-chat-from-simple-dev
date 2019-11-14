@@ -1,19 +1,27 @@
 import express from 'express';
+import routes from './routes';
 
-import Services from './services';
+// Get environment data
+import dotenv from 'dotenv';
+dotenv.config();
+
+// Connect to database
 import { setUpConnection } from './data-base';
-import * as config from './etc/config.json';
-
 setUpConnection();
 
-const serverPort = (<any>config).serverPort;
-
+// Start app
 const app = express();
 
-app.get('/', async (req, res) => {
-	res.send("result");
-})
+// Setting body parsers
+app.use( express.json() );
+app.use( express.urlencoded({ extended: true }));
 
-app.listen(serverPort, () => {
-	console.log(`Server started on port ${serverPort}`);
+// Setting routes
+app.use('/register', routes.register);
+app.use('/login', routes.login);
+app.use('/chats', routes.chats);
+
+// Set listening port 
+app.listen(process.env.SERVER_PORT, () => {
+	console.log(`Server started on port ${process.env.SERVER_PORT} \n${process.env.API_PREFIX}`);
 })

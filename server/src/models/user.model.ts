@@ -5,9 +5,11 @@ const userSchema = new mongoose.Schema({
 	name: String,
 	password: String,
 	email: String,
-	avatar: String,
+	avatar: {type: String, default: `${__dirname + process.env.PUBLIC_ROUTE}/incognito.png`},
 	friends: Array,
 	chats: Array,
-})
+});
 
-const User = mongoose.model("User", userSchema);
+const UserModel = mongoose.model("User", userSchema);
+
+export default UserModel;

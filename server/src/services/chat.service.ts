@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
-
-const Chat = mongoose.model('Chat');
+import ChatModel from '../models/chat.model';
 
 export function getAllChats() {
-	return Chat.find();
+	return ChatModel.find();
 }
