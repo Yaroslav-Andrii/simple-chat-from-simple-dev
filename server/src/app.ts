@@ -16,6 +16,13 @@ const app = express();
 app.use( express.json() );
 app.use( express.urlencoded({ extended: true }));
 
+// CROS
+app.use('/', (req: express.Request, res: express.Response, next: express.NextFunction) => {
+	res.header("Access-Control-Allow-Origin", process.env.CLIENT_DOMAIN);
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, auth-token");
+	next();
+})
+
 // Setting routes
 app.use('/register', routes.register);
 app.use('/login', routes.login);
