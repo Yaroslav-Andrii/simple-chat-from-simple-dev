@@ -1,10 +1,10 @@
-import Friend from './friend.interface';
+import IFriend from './friend.interface';
 import Chat from './chat.interface';
 
-export interface ISafeUser {
+export default interface ISafeUser {
 	id: string;
 	name: string;
 	avatar: string;
-	friends: Friend[];
+	friends: IFriend[];
 	chats: Chat[];
 }

@@ -1,7 +1,7 @@
-import Friend from "./friend.interface";
+import IFriend from "./friend.interface";
 
-export default interface Chat {
+export default interface IChat {
 	id: string;
 	name: string;
-	users: Friend[];
+	users: IFriend[];
 }

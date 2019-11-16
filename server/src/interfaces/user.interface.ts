@@ -1,12 +1,12 @@
-import Friend from './friend.interface';
+import IFriend from './friend.interface';
 import Chat from './chat.interface';
 
-export interface IUser {
-	id: string;
+export default interface IUser {
+	_id: string;
 	name?: string;
 	password: string;
 	email: string;
 	avatar?: string;
-	friends?: Friend[];
+	friends?: IFriend[];
 	chats?: Chat[];
 }

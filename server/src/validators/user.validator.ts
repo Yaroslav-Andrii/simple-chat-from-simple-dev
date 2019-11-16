@@ -1,5 +1,5 @@
 import Joi from '@hapi/joi';
-import { IUser } from '../interfaces/user.interface';
+import IUser from '../interfaces/user.interface';
 
 export function registerValidation(data: IUser): Joi.ValidationResult {
 

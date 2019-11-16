@@ -4,7 +4,7 @@ import middlewares from '../middlewares';
 const loginRouter = express.Router();
 
 loginRouter.post('/', middlewares.login, async(req: express.Request, res: express.Response) => {
-	res.send(req.body.userData);
+	res.send({message: 'Wellcome'});
 });
 
 export default loginRouter;
