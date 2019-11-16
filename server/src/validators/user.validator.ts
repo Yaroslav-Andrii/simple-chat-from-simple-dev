@@ -1,7 +1,7 @@
 import Joi from '@hapi/joi';
-import User from '../interfaces/user.interface';
+import { IUser } from '../interfaces/user.interface';
 
-export function registerValidation(data: User): Joi.ValidationResult {
+export function registerValidation(data: IUser): Joi.ValidationResult {
 
 	// Setting validation schema
 	const schema = Joi.object({
@@ -26,7 +26,7 @@ export function registerValidation(data: User): Joi.ValidationResult {
 	return value;
 }
 
-export function loginValidation(data: User): Joi.ValidationResult {
+export function loginValidation(data: IUser): Joi.ValidationResult {
 
 	// Setting validation schema
 	const schema = Joi.object({

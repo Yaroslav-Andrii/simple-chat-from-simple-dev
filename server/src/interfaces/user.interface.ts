@@ -1,8 +1,8 @@
 import Friend from './friend.interface';
 import Chat from './chat.interface';
 
-export default interface User {
-	id?: string;
+export interface IUser {
+	id: string;
 	name?: string;
 	password: string;
 	email: string;

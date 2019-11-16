@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 import Services from '../services';
 import Validators from '../validators';
-import User from '../interfaces/user.interface';
+import { ISafeUser } from '../interfaces/safe-user.interface';
 
 async function registerMiddlewar(req: express.Request, res: express.Response, next: express.NextFunction) {
 	try {
@@ -27,16 +27,21 @@ async function registerMiddlewar(req: express.Request, res: express.Response, ne
 			throw new Error("User didn't create");
 		}
 
-		const user: User = {
+		// Create and assign a token
+		const token = jwt.sign({id: resultOfCreating._id}, <string>process.env.TOKEN_SECRET);
+
+		res.header('access-token', token);
+
+		// Create user data response
+		const safeUser: ISafeUser = {
 			id: resultOfCreating._id,
-			email: resultOfCreating.email,
-			password: resultOfCreating.password
+			name: resultOfCreating.name,
+			avatar: resultOfCreating.avatar,
+			friends: resultOfCreating.friends,
+			chats: resultOfCreating.chats,
 		}
 
-		// Create and assign a token
-		const token = jwt.sign({id: user.id}, <string>process.env.TOKEN_SECRET);
-
-		res.header('auth-token', token);
+		req.body.userData = safeUser;
 
 		next();
 	} catch (error) {

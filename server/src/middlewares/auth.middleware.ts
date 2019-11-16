@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 async function authMiddleware(req: express.Request, res: express.Response, next: express.NextFunction) {
 	try {
-		const token = req.get('auth-token');
+		const token = req.get('access-token');
 		if (!token) throw new Error('Access denied');
 
 		const verified = jwt.verify(token, <string>process.env.TOKEN_SECRET);

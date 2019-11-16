@@ -1,5 +1,6 @@
 import express from 'express';
 import routes from './routes';
+import cors from 'cors'
 
 // Get environment data
 import dotenv from 'dotenv';
@@ -18,8 +19,16 @@ app.use( express.urlencoded({ extended: true }));
 
 // CROS
 app.use('/', (req: express.Request, res: express.Response, next: express.NextFunction) => {
-	res.header("Access-Control-Allow-Origin", process.env.CLIENT_DOMAIN);
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, auth-token");
+
+	console.log(req.headers);
+	
+	res.set({
+		"Access-Control-Allow-Origin" : ["*"],
+		'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+		'Access-Control-Allow-Headers': 'Content-Type,access-token',
+		'Access-Control-Expose-Headers': 'access-token'
+	})
+
 	next();
 })
 
