@@ -5,5 +5,5 @@
   ></app-messenger-frame>
 </div>
 <div *ngIf='!signedIn'>
-  <app-loggin></app-loggin>
+  <app-loggin (onSigenedId)="openMessenger($event)"></app-loggin>
 </div>

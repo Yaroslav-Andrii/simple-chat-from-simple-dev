@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Message } from '../../shared/message.interface'
+import IMessage from '../../interfaces/message.interface'
 
 @Component({
   selector: 'app-message',
@@ -8,7 +8,7 @@ import { Message } from '../../shared/message.interface'
 })
 export class MessageComponent implements OnInit {
 
-  @Input() data: Message;
+  @Input() data: IMessage;
 
   private ownId; // Get from somoewere
 

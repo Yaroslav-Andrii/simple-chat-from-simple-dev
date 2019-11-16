@@ -9,6 +9,12 @@ import { ListComponent } from './sidebar/list/list.component';
 import { ItemComponent } from './sidebar/list/item/item.component';
 import { MessageComponent } from './messenger-frame/message/message.component';
 import { LogginComponent } from './loggin/loggin.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from './shared/auth.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptors } from './shared/auth-interceptors.service';
+import { UserService } from './shared/user.service';
 
 @NgModule({
   declarations: [
@@ -22,9 +28,19 @@ import { LogginComponent } from './loggin/loggin.component';
     LogginComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    UserService,
+    { 
+      provide: HTTP_INTERCEPTORS, 
+      useClass: AuthInterceptors,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
