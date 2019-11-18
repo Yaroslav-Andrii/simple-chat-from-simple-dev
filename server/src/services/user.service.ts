@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
 import UserModel from '../models/user.model';
 import IUser from '../interfaces/user.interface';
-import ISafeUser from '../interfaces/safe-user.interface';
+import ISecureUser from '../interfaces/secure-user.interface';
 
 export function getUserByEmail(email: string) {
 	return UserModel.findOne({ email });
 }
 
-export async function getUserById(id: string): Promise<ISafeUser> {
+export async function getUserById(id: string): Promise<ISecureUser> {
 	
 	const result: any = await UserModel.findById(id);
 

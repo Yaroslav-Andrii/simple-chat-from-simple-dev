@@ -3,7 +3,7 @@ import * as chatService from './chat.service';
 
 const Services = {
 	userService,
-	chatService
+	chatService,
 };
 
 export default Services;

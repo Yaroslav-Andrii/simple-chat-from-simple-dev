@@ -15,6 +15,7 @@ import { AuthService } from './shared/auth.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptors } from './shared/auth-interceptors.service';
 import { UserService } from './shared/user.service';
+import { ChatService } from './shared/chat.service';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { UserService } from './shared/user.service';
   providers: [
     AuthService,
     UserService,
+    ChatService,
     { 
       provide: HTTP_INTERCEPTORS, 
       useClass: AuthInterceptors,

@@ -1,14 +1,13 @@
 import express from 'express';
-import middlewares from '../middlewares';
+import Middlewares from '../middlewares';
 import Services from '../services'
+import IChat from '../interfaces/chat.interface';
 
 const chatsRouter = express.Router();
 
-chatsRouter.get('/', middlewares.auth, async(req: express.Request, res: express.Response) => {
-	//const result =  await Services.userService.getAll();
-	//const result = await Services.userService.clear();
-
-	res.send(`sending chats of user by id ${req.body.authInfo.id}`);
+chatsRouter.get('/', Middlewares.auth, async(req: express.Request, res: express.Response) => {
+	const roomsList: IChat[] = await Services.chatService.getAllChats();
+	res.send(roomsList);
 });
 
 export default chatsRouter;

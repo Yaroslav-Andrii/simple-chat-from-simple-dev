@@ -18,4 +18,8 @@ export class UserService {
   public getFriends(): IUserFriend[] {
     return this.UserInfo.friends;
   }
+
+  public getOwnId(): string {
+    return this.UserInfo.id;
+  }
 }

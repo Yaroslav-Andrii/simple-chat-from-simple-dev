@@ -1,9 +1,9 @@
 import express from 'express';
-import middlewares from '../middlewares';
+import Middlewares from '../middlewares';
 
 const loginRouter = express.Router();
 
-loginRouter.post('/', middlewares.login, async(req: express.Request, res: express.Response) => {
+loginRouter.post('/', Middlewares.login, async(req: express.Request, res: express.Response) => {
 	res.send({message: 'Wellcome'});
 });
 

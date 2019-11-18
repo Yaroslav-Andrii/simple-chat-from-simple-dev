@@ -27,6 +27,7 @@
     "@types/dotenv-safe": "^8.1.0",
     "@types/express": "^4.17.2",
     "@types/hapi__joi": "^16.0.3",
+    "@types/http-server": "^0.10.0",
     "@types/jsonwebtoken": "^8.3.5",
     "@types/mongoose": "^5.5.30",
     "@types/socket.io": "^2.1.4"
