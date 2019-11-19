@@ -7,10 +7,6 @@
 	font-family: sans-serif;
 
 	.warning {
-		position: absolute;
-		top: 5%;
-		width: 30%;
-
 		border-radius: 15px;
 		background-color: rgba(182, 32, 32, 0.74);
 		color: white;
@@ -20,41 +16,28 @@
 	}
 
 	h2 {
+		margin: 15px;
 		font-size: 2.5rem;
 		color: #007acc;
 		text-shadow: rgba(128, 128, 128, 0.445) 3px 3px 2px;
-
-		position: absolute;
 	}
 
 	form {
 
 		&#login {
-			h2 {
-				top: 20px
-			}
-
 			width: 30vw;
 			height: 40vh;
 			min-height: 225px;
 		}
 
 		&#register {
-			h2 {
-				top: 20px
-			}
-
 			width: 30vw;
 			height: 50vh;
 			min-height: 325px;
 		}
 
-	
-
 		border-radius: 25px;
 		box-shadow: 0px 0px 8px 5px rgba(156, 156, 156, 0.55);
-
-		padding-top: 40px;
 
 		display: flex;
 		flex-direction: column;
@@ -94,6 +77,11 @@
 			border-radius: 10px;
 			color: white;
 			cursor: pointer;
+
+			&:disabled {
+				background-color: #3b4349;
+				cursor: not-allowed;
+			}
 		
 			&:hover, &:focus {
 				box-shadow: 0px 0px 0px 4px #d8d8d883;
