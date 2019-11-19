@@ -3,6 +3,10 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { IRegisterBody, ILoginBody } from '../interfaces/auth-body.interface';
 import signValidator from '../validators/sign.validator';
 import { AuthService } from '../shared/auth.service';
+import { catchError } from 'rxjs/operators';
+import { of, Observable } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
+import IUser from '../interfaces/user.interface';
 
 @Component({
   selector: 'app-loggin',
@@ -31,14 +35,35 @@ export class LogginComponent implements OnInit {
 
   constructor(private authService: AuthService) {}
 
+  private handleError<T> (operation = 'operation', result?: T) {
+
+    return (error: any): Observable<T> => {
+
+      this.warningMessage = error.error;
+      this.warning = true;
+
+      return of(result as T);
+    }
+  }
+
+  private dataTrim(data: ILoginBody | IRegisterBody): ILoginBody | IRegisterBody {
+
+    for (let key in data) {
+      if (key === 'avatar') continue;
+
+      if (data[key] !== null) {
+        data[key] = data[key].trim();
+      }
+    }
+    return data;
+  }
+
   private loginRequest() {
     
-    // Triming data
-    for (let key in this.loginBody) {
-      if (key === 'avatar') continue;
-      if (this.loginBody[key] !== null) this.loginBody[key].trim();
-    }
+    // Trim data value
+    this.loginBody = this.dataTrim(this.loginBody) as ILoginBody;
 
+    // Validate data value
     const errorMessage = signValidator(this.loginBody);
 
     if (errorMessage) {
@@ -47,22 +72,26 @@ export class LogginComponent implements OnInit {
       return;
     }
 
-    this.authService.loginRequest(this.loginBody).subscribe(data => {
-      this.authService.setToken(data.headers);
-      this.onSigenedId.emit(true);
-    });
+    // Send request
+    this.authService.loginRequest(this.loginBody)
+      .pipe(
+        catchError(this.handleError<HttpResponse<IUser>>())
+      )
+      .subscribe(data => {
+        if (!data) return;
+        this.authService.setToken(data.headers);
+        this.onSigenedId.emit(true);
+      });
 
     this.loginBody = { email: null, password: null };
   }
 
   private registerRequest() {
 
-    // Triming data
-    for (let key in this.registerBody) {
-      if (key === 'avatar') continue;
-      if (this.registerBody[key] !== null) this.registerBody[key].trim();
-    }
+    // Trim data value
+    this.registerBody = this.dataTrim(this.registerBody) as IRegisterBody;
 
+    // Validate data value
     const errorMessage = signValidator(this.registerBody);
 
     if (errorMessage) {
@@ -71,10 +100,16 @@ export class LogginComponent implements OnInit {
       return;
     }
 
-    this.authService.registerRequest(this.registerBody).subscribe(data => {
-      this.authService.setToken(data.headers);
-      this.onSigenedId.emit(true);
-    })
+    // Send request
+    this.authService.registerRequest(this.registerBody)
+      .pipe(
+        catchError(this.handleError<HttpResponse<IUser>>())
+      )
+      .subscribe(data => {
+        if (!data) return;
+        this.authService.setToken(data.headers);
+        this.onSigenedId.emit(true);
+      })
     this.registerBody = {email: null, password: null, name: null};
   }
 

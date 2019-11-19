@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpResponse } from '@angular/common/http'
+import { HttpResponse } from '@angular/common/http';
 
 import { ILoginBody, IRegisterBody } from '../interfaces/auth-body.interface';
 import IUser from '../interfaces/user.interface';
@@ -24,11 +24,11 @@ export class AuthService {
   }
 
   public registerRequest(body: IRegisterBody): Observable<HttpResponse<IUser>> {
-    return this.httpClient.post<IUser>(this.registerUrl, body, { observe: 'response' });
+    return this.httpClient.post<IUser>(this.registerUrl, body, { observe: 'response' })
   }
 
   public loginRequest(body: ILoginBody): Observable<HttpResponse<IUser>> {
-    return this.httpClient.post<IUser>(this.loginUrl, body, { observe: 'response' });
+    return this.httpClient.post<IUser>(this.loginUrl, body, { observe: 'response' })
   }
 
   public getUser(): Observable<IUser> {
