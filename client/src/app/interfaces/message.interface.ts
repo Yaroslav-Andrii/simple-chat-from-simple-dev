@@ -1,5 +1,5 @@
 export default interface IMessage {
-	date: string;
+	date: Date;
 	senderId: string;
 	text: string;
 	rank: number;
