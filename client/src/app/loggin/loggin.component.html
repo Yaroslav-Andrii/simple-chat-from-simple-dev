@@ -1,23 +1,21 @@
 <div class="loggin">
-
-	<div class="warning" *ngIf='warning'>
-		{{warningMessage}}
-	</div>
-
 	<form 
 		id="login" 
 		#loginForm='ngForm' 
-		(submit)="loginRequest()" 
+		(ngSubmit)="loginRequest()" 
 		*ngIf="!registration"
 	>
-		<h2>Welcome</h2>
+		<h2 
+			[textContent]='warning ? warningMessage : "Welcome"'
+			[class.warning]='warning'
+		></h2>
 		
 		<input 
 			[(ngModel)]='loginBody.email' 
 			name="email" 
-			type="email" 
 			placeholder="Email"
 			required
+			email
 		>
 
 		<input 
@@ -29,7 +27,7 @@
 		>
 		
 		<div class="buttons">
-			<button (click)="loginForm.submit">Log in</button>
+			<button [disabled]='!loginForm.valid' type="submit">Log in</button>
 			<button (click)="registration = true">Sign in</button>
 		</div>
 	</form>
@@ -38,9 +36,12 @@
 		id='register' 
 		*ngIf="registration" 
 		#registerForm="ngForm"
-		(submit)="registerRequest()"
+		(ngSubmit)="registerRequest()"
 	>
-		<h2>Register</h2>
+		<h2 
+			[textContent]='warning ? warningMessage : "Register"'
+			[class.warning]='warning'
+		></h2>
 		
 		<input 
 			[(ngModel)]="registerBody.name"
@@ -52,9 +53,9 @@
 		<input
 			[(ngModel)]="registerBody.email"
 			name="email" 
-			required
-			type="email" 
 			placeholder="Email"
+			required
+			email
 		>
 		<input 
 			[(ngModel)]="registerBody.password"
@@ -71,7 +72,7 @@
 		>
 		
 		<div class="buttons">
-			<button (click)="registerForm.submit">Confirm</button>
+			<button type="submit" [disabled]='!registerForm.valid'>Confirm</button>
 			<button 
 				class="back" 
 				(click)="registration = false"
