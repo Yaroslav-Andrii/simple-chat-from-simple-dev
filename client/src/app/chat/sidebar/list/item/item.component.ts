@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import IUserFriend from '../../../interfaces/user-friend.interface';
+import IUserFriend from '../../../../interfaces/user-friend.interface';
 
 @Component({
   selector: 'app-item',

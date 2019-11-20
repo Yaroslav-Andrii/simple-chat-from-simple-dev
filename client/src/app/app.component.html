@@ -1,10 +1,1 @@
-<div *ngIf='signedIn' class='wrapper'>
-  <app-sidebar class="app-sidebar"></app-sidebar>
-  <app-messenger-frame 
-    class="app-messenger-frame"
-  ></app-messenger-frame>
-</div>
-<div *ngIf='!signedIn'>
-  <router-outlet></router-outlet>
-  <!--<app-loggin (onSigenedId)="openMessenger($event)"></app-loggin>-->
-</div>
+<router-outlet></router-outlet>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { ILoginBody } from '../interfaces/auth-body.interface';
 import signValidator from '../validators/sign.validator';
@@ -8,6 +8,7 @@ import IUser from '../interfaces/user.interface';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Observable, of } from 'rxjs';
 import dataTrim from '../helpers/log-data-trim.helper';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -26,8 +27,10 @@ export class LoginComponent implements OnInit {
   private warning: boolean = false;
 
   constructor(
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+    private _router: Router
+  ) { 
+  }
 
   private handleError<T> (operation = 'operation', result?: T) {
 
@@ -62,7 +65,7 @@ export class LoginComponent implements OnInit {
       .subscribe(data => {
         if (!data) return;
         this.authService.setToken(data.headers);
-        //this.onSigenedId.emit(true);
+        this._router.navigate(['/chat']);
       });
 
     this.loginBody = { email: null, password: null };
@@ -70,5 +73,4 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

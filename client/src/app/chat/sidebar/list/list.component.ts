@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import IUserFriend from '../../interfaces/user-friend.interface'
+import IUserFriend from '../../../interfaces/user-friend.interface'
 import { UserService } from 'src/app/shared/user.service';
 
 @Component({

@@ -11,8 +11,8 @@ export class UserService {
 
   constructor() {}
 
-  public initialUser(userData: IUser): void {
-    this.UserInfo = userData;
+  public initialUser(data: IUser) {
+    this.UserInfo = data;
   }
 
   public getFriends(): IUserFriend[] {
