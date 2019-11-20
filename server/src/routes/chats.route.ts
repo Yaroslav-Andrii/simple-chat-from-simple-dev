@@ -10,4 +10,23 @@ chatsRouter.get('/', Middlewares.auth, async(req: express.Request, res: express.
 	res.send(roomsList);
 });
 
+chatsRouter.get('/:id', Middlewares.auth, async(req: express.Request, res: express.Response) => {
+	try {
+		const chat = await Services.chatService.getChatById(req.params.id);
+
+		if (!chat) {
+			throw new Error('Chat is not definded');
+		}
+
+		res.send(chat);
+	} catch (error) {
+		res.status(404).send(error.message);
+	}
+});
+
+chatsRouter.post('/createNew', Middlewares.auth, Middlewares.chat, async(req: express.Request, res: express.Response) => {
+	const newChat = await Services.chatService.getChatById(req.body.chatId);
+	res.send(newChat);
+});
+
 export default chatsRouter;
