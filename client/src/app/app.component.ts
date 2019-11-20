@@ -4,6 +4,7 @@ import { UserService } from './shared/user.service';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import IUser from './interfaces/user.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,11 @@ export class AppComponent{
   public MyData;
   public signedIn: boolean;
 
-  constructor(private authService: AuthService, private userService: UserService) {
+  constructor(
+    private authService: AuthService, 
+    private userService: UserService,
+    private _router: Router
+  ) {
     this.authorization();
   }
 
@@ -27,7 +32,7 @@ export class AppComponent{
 
   private async authorization(): Promise<void> {
     if (!localStorage.getItem('_access_token')) {
-      this.signedIn = false;
+      this._router.navigate(['/login']);
     } else {
       this.MyData = await this.authService.getUser()
       .pipe(
@@ -38,7 +43,7 @@ export class AppComponent{
 
         this.MyData = data;
         this.userService.initialUser(data);
-        this.signedIn = true;
+        this._router.navigate([''])
       });
     }
   }

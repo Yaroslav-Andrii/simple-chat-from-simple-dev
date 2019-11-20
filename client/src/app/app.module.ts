@@ -8,7 +8,6 @@ import { SidebarHeaderComponent } from './sidebar/sidebar-header/sidebar-header.
 import { ListComponent } from './sidebar/list/list.component';
 import { ItemComponent } from './sidebar/list/item/item.component';
 import { MessageComponent } from './messenger-frame/message/message.component';
-import { LogginComponent } from './loggin/loggin.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './shared/auth.service';
@@ -17,6 +16,9 @@ import { AuthInterceptors } from './shared/auth-interceptors.service';
 import { UserService } from './shared/user.service';
 import { ChatService } from './shared/chat.service';
 import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { AppRoutingModule } from './app-routing.module';
     ListComponent,
     ItemComponent,
     MessageComponent,
-    LogginComponent
+    LoginComponent,
+    RegisterComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
