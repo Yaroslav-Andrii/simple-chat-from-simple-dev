@@ -5,6 +5,16 @@ import ISecureUser from '../interfaces/secure-user.interface';
 import IFriend from '../interfaces/friend.interface';
 import IChat from '../interfaces/chat.interface';
 
+export async function createChat(data: IChat): Promise<IChat> {
+	const result: any = await ChatModel.create(<IChat>data);
+	return result;
+}
+
+export async function getChatById(id: string): Promise<IChat> {
+	const result: any = await ChatModel.findById(id);
+	return result;
+}
+
 export async function getAllChats(): Promise<IChat[]> {
 	const roomsList: any = await ChatModel.find();
 	return roomsList;
@@ -27,5 +37,10 @@ export async function getAllContacts(): Promise<IFriend[]> {
 	}
 
 	// Return Promise of list with secure users data
+	return result;
+}
+
+export async function remove(): Promise<IChat[]> {
+	const result: any = await ChatModel.remove({});
 	return result;
 }
