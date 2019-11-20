@@ -17,7 +17,7 @@ export class MessengerFrameComponent implements OnInit {
   private ownId: string = this.userService.getOwnId();
 
   private message: IMessage = {
-    date: new Date().toLocaleDateString(),
+    date: new Date(),
     senderId: this.ownId,
     text: null,
     rank: null,
