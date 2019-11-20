@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
 const chatSchema = new mongoose.Schema({
-	id: String,
 	name: String,
 	users: Array,
+	messages: Array,
 });
 
 const ChatModel = mongoose.model("Chat", chatSchema);
