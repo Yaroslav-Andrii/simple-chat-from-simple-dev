@@ -3,6 +3,8 @@ import http from 'http';
 import socketIo from 'socket.io';
 import routes from './routes';
 
+import Controllers from './controllers';
+
 // Get environment data
 import dotenv from 'dotenv';
 dotenv.config();
@@ -18,9 +20,8 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-io.on('connection', (socket) => {
-	socket.on('message', (data)=> console.log(data));
-});
+// Web socket connection
+io.on('connection', Controllers.socket.connection);
 
 // Setting body parsers
 app.use( express.json() );

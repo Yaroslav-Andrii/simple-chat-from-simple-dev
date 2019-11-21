@@ -4,6 +4,7 @@ import UserModel from '../models/user.model';
 import ISecureUser from '../interfaces/secure-user.interface';
 import IFriend from '../interfaces/friend.interface';
 import IChat from '../interfaces/chat.interface';
+import IMessage from '../interfaces/message.interface';
 
 export async function createChat(data: IChat): Promise<IChat> {
 	const result: any = await ChatModel.create(<IChat>data);
@@ -43,4 +44,46 @@ export async function getAllContacts(): Promise<IFriend[]> {
 export async function remove(): Promise<IChat[]> {
 	const result: any = await ChatModel.remove({});
 	return result;
+}
+
+export async function pushMessages(buffer: IMessage[], chatId: string): Promise<void> {
+
+	try {
+		// Get chat data
+		const chat: any = await ChatModel.findById(chatId);
+
+		if (!chat) throw new Error('Chat not found!')
+
+		// Get array of messages
+		const chatMeassages: IMessage[] = chat.messages;
+
+		// Add message from buffer to messages array
+		for (let message of buffer) {
+			chatMeassages.push(message);
+		}
+
+		// Update chat date
+		await ChatModel.findByIdAndUpdate(chatId, {messages: chatMeassages}, err => {
+			if (err) throw err;
+
+			console.log(`Chat with id ${chatId} updated`)
+		})
+
+	} catch (error) {
+		console.log(error.message);
+	}
+}
+
+export async function getRoomNameById(chatId: string): Promise<any> {
+	try {
+		// Get chat data
+		const chat: any = await ChatModel.findById(chatId);
+		let roomName: string = chat.name;
+		
+		if (!roomName) throw new Error("Chat not found")
+
+		return roomName;
+	} catch (error) {
+		console.log(error.message);
+	}
 }
