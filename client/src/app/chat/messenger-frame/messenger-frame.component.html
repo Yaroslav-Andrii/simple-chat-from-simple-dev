@@ -1,21 +1,21 @@
 <div class="messenger">
 	<div class="header">
-		<div *ngIf="interlocutor" class="info">
+		<div *ngIf="activeChat" class="info">
 			<div class="status">
-				<span class="interlocutor-name">{{interlocutor.name}}</span><br>
-				<span class='online'  *ngIf='interlocutor.status'>online</span>
+				<span class="interlocutor-name">{{activeChat.name}}</span><br>
+				<span class='online'  *ngIf='status'>online</span>
 				<!--<span class='offline' *ngIf='!interlocutor.status'>offline</span> Will check by soocket-->
 			</div>
-			<input type="text" placeholder="search in chat...">
+			<!--<input (keydown.enter)="findeMessage()" type="text" placeholder="search in chat..." [(ngModel)]='searchString'>-->
 		</div>
 	</div>
-	<ul *ngIf="interlocutor">
+	<ul *ngIf="activeChat">
 		<li *ngFor='let message of messages'>
 			<app-message [data]='message'></app-message>
 		</li>
 	</ul>
 	<div 
-		*ngIf="interlocutor"
+		*ngIf="activeChat"
 		class="send-field"
 	>
 		<textarea [(ngModel)]='messageText' placeholder="Enter your message..." rows='1'></textarea>

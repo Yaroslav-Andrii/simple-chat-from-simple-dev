@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
-import IUserFriend from '../../../interfaces/user-friend.interface'
-import { UserService } from 'src/app/shared/user.service';
+import IChat from 'src/app/interfaces/chat.interface';
+import { ChatService } from 'src/app/shared/chat.service';
 
 @Component({
   selector: 'app-list',
@@ -10,13 +10,21 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class ListComponent implements OnInit {
 
+  private chatsList: IChat[];
   private active: string;
 
-  private FriendsList: IUserFriend[];
+  constructor(private chatService: ChatService ) {
+    this.chatService.loadGroupChatsList()
+      .subscribe(data => {
+        this.chatsList = data;
+      });
+  }
 
-  constructor(private userService: UserService ) {}
+  public activate(id: string) {
+    this.chatService.chatActivated.emit( this.chatsList.find(chat => chat._id === id) );
+  }
 
   ngOnInit() {
-    this.FriendsList = this.userService.getFriends();
+    console.log(this.chatsList, 'herer')
   }
 }

@@ -1,10 +1,11 @@
-<ul class="list">
+<ul class='list'>
 	<li 
-		[class.active]='active === friend.id'
-		(click)='active = friend.id'
+		[class.active]='active === chat._id'
+		(click)='active = chat._id'
+		(click)='activate(chat._id)'
 		
-		*ngFor="let friend of FriendsList" 
+		*ngFor='let chat of chatsList' 
 	>
-		<app-item [data]='friend'></app-item>
+		<app-item [data]='chat'></app-item>
 	</li>
 </ul>

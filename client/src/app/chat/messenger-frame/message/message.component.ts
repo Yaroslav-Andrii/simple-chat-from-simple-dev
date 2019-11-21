@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import IMessage from '../../../interfaces/message.interface'
+import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-message',
@@ -12,7 +13,9 @@ export class MessageComponent implements OnInit {
 
   private ownId; // Get from somoewere
 
-  constructor() { }
+  constructor(private userService: UserService) {
+    this.ownId = this.userService.getOwnId();
+  }
 
   ngOnInit() {
   }

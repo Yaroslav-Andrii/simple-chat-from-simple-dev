@@ -19,11 +19,22 @@
 		min-height: 60px;
 		align-items: center;
 
-		display: flex;
-		justify-content: space-between;
+		
+		
 		align-items: center;
 		color: white;
 		background-color: #007acc;
+
+		.info {
+			display: flex;
+			justify-content: space-between;
+			height: 40px;
+			margin-top: 10px;
+
+			.status {
+				line-height: 20px;
+			}
+		}
 
 		border-bottom: 4px solid rgba(255, 255, 255, 0.3);
 
