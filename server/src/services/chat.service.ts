@@ -58,7 +58,10 @@ export async function pushMessages(buffer: IMessage[], chatId: string): Promise<
 		const chatMeassages: IMessage[] = chat.messages;
 
 		// Add message from buffer to messages array
+		let runk = chatMeassages.length;
+
 		for (let message of buffer) {
+			message.rank = runk++;
 			chatMeassages.push(message);
 		}
 
@@ -74,7 +77,7 @@ export async function pushMessages(buffer: IMessage[], chatId: string): Promise<
 	}
 }
 
-export async function getRoomNameById(chatId: string): Promise<any> {
+export async function getRoomNameById(chatId: string): Promise<string | undefined> {
 	try {
 		// Get chat data
 		const chat: any = await ChatModel.findById(chatId);
