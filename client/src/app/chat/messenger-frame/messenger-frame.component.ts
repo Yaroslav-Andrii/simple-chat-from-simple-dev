@@ -64,8 +64,10 @@ export class MessengerFrameComponent implements OnInit {
   }
 
   private sendMessage() {
+    event.preventDefault();
     this.message.text = this.messageText;
     this.chatService.send(this.message);
+    this.messageText = null;
 
     this.showMessage({
       date: this.message.date,

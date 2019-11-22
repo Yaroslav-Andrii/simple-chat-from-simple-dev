@@ -18,7 +18,7 @@
 		*ngIf="activeChat"
 		class="send-field"
 	>
-		<textarea [(ngModel)]='messageText' placeholder="Enter your message..." rows='1'></textarea>
+		<textarea [(ngModel)]='messageText' (keydown.enter)='sendMessage()' placeholder="Enter your message..." rows='1'></textarea>
 		<button (click)='sendMessage()'><img src="assets/1.png" width="38px"></button>
 	</div>
 </div>
