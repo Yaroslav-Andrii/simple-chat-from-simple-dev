@@ -1,4 +1,4 @@
 <div class="sidebar">
-	<app-sidebar-header class="app-sidebar-header"></app-sidebar-header>
-	<app-list class="app-list"></app-list>
+	<app-sidebar-header (searchParams)='searchParams = $event' class="app-sidebar-header"></app-sidebar-header>
+	<app-list [searchParams]='searchParams' class="app-list"></app-list>
 </div>

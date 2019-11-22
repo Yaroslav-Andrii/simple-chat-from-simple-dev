@@ -1,5 +1,5 @@
 <div class='sidebar-header'>
-	<button><img src="assets/1.png" width="35px"></button>
-	<button><img src="assets/1.png" width="35px"></button>
-	<input type="text" placeholder="search">
+	<button (click)="flag = 'public'; sendSearchParams()"><img src="assets/1.png" width="35px"></button>
+	<button (click)="flag = 'friend'; sendSearchParams()"><img src="assets/1.png" width="35px"></button>
+	<input [(ngModel)]="searchString" (input)=sendSearchParams() type="text" placeholder="search...">
 </div>

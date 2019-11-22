@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import ISearchParams from '../../../interfaces/search-params.interface';
 
 @Component({
   selector: 'app-sidebar-header',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarHeaderComponent implements OnInit {
 
+  @Output() searchParams: EventEmitter<ISearchParams> = new EventEmitter();
+
+  private flag: string = 'publics';
+  private searchString: string = '';
+
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
+  sendSearchParams(): void {
+    this.searchParams.emit({
+      flag: this.flag,
+      string: this.searchString,
+    });
+  }
 }

@@ -6,4 +6,5 @@ export default interface IChat {
 	name: string,
 	users: IUserFriend[],
 	messages: IMessage[],
+	type: string,
 }
