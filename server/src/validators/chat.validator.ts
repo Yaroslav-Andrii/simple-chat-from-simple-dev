@@ -12,6 +12,9 @@ export function chatValidator(data: IChat): Joi.ValidationResult {
 		users: Joi.array()
 			.required(),
 		messages: Joi.array(),
+		type: Joi.string()
+			.pattern(/^(public|friend)$/i)
+			.required(),
 	});
 
 	// Validation

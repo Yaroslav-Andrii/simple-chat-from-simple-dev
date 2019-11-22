@@ -9,6 +9,7 @@ async function chatMiddleware(req: express.Request, res: express.Response, next:
 			name: req.body.name,
 			users: req.body.users,
 			messages: [],
+			type: req.body.type,
 		}
 
 		const { error } = Validators.chat.chatValidator(chatInfo);
