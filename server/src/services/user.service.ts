@@ -36,3 +36,16 @@ export function clear() {
 export function getAll() {
 	return UserModel.find({});
 }
+
+export async function joinChat(chatId: string, userId: string): Promise<void> {
+	
+	const user: any = await UserModel.findById(userId);
+	user.chats.push(chatId);
+	const listOfChats = user.chats;
+	
+	UserModel.findByIdAndUpdate(userId, { chats: listOfChats }, err => {
+		if (err) {
+			console.error(err);
+		}
+	});
+}
