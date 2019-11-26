@@ -18,7 +18,12 @@ chatsRouter.get('/:id', Middlewares.auth, async(req: express.Request, res: expre
 			throw new Error('Chat is not definded');
 		}
 
-		res.send(chat);
+		if (req.query.messages > 0) {
+			res.send( chat.messages.slice(-req.query.messages) );
+		} else {
+			res.send(chat);
+		}
+
 	} catch (error) {
 		res.status(404).send(error.message);
 	}
