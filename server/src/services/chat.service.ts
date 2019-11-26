@@ -34,6 +34,7 @@ export async function getAllContacts(): Promise<IFriend[]> {
 			id: user._id,
 			name: user.name,
 			avatar: user.avatar,
+			chatId: user.chatId
 		});
 	}
 
@@ -89,4 +90,33 @@ export async function getRoomNameById(chatId: string): Promise<string | undefine
 	} catch (error) {
 		console.log(error.message);
 	}
+}
+
+export async function getUserChats(chatsList: string[]): Promise<IChat[]> {
+	const result = [];
+
+	for (let chatId of chatsList) {
+		let chat: any = await ChatModel.findById(chatId);
+
+		if (!chat) {
+			console.error(`chat with ${chatId} not found`);
+			continue;
+		}
+
+		result.push(chat as IChat);
+	}
+
+	return result;
+}
+
+export async function joinUser(userId: string, chatId: string): Promise<void> {
+	const chat: any = await ChatModel.findById(chatId);
+	chat.users.push(userId);
+	const listOfUsers = chat.users;
+
+	ChatModel.findByIdAndUpdate(chatId, { users: listOfUsers }, err => {
+		if (err) {
+			console.error(err);
+		}
+	});
 }
