@@ -10,6 +10,9 @@
 		</div>
 	</div>
 	<ul *ngIf="activeChat">
+		<li *ngFor='let message of messagesHistory'>
+			<app-message [data]='message'></app-message>
+		</li>
 		<li *ngFor='let message of messages'>
 			<app-message [data]='message'></app-message>
 		</li>

@@ -1,11 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import IMessage from '../../interfaces/message.interface';
-import IUserFriend from '../../interfaces/user-friend.interface';
 import { ChatService } from '../../shared/chat.service';
 import { UserService } from 'src/app/shared/user.service';
-import { EventEmitter } from 'events';
 import IChat from 'src/app/interfaces/chat.interface';
-import { ListComponent } from '../sidebar/list/list.component';
 
 @Component({
   selector: 'app-messenger-frame',
@@ -15,11 +12,11 @@ import { ListComponent } from '../sidebar/list/list.component';
 export class MessengerFrameComponent implements OnInit {
 
   private messages: IMessage[] = [];
+  private messagesHistory: IMessage[] = [];
   private activeChat: IChat;
   private messageText: string;
   private ownId: string;
   public status: boolean = true;
-  private roomName = 'Public';
 
   private newIncoming = this.chatService.incomingMessage;
   private newActivated = this.chatService.chatActivated;
@@ -41,10 +38,17 @@ export class MessengerFrameComponent implements OnInit {
     this.ownId = this.userService.getOwnId();
     this.message.senderId = this.ownId;
 
-    this.newActivated.subscribe(data => {
-      this.activeChat = data;
-      this.chatService.joinTo(data._id);
-    })
+    this.newActivated
+      .subscribe((chat: IChat) => {
+        this.messages = [];
+        this.activeChat = chat;
+        this.chatService.joinTo(chat._id);
+
+        this.chatService.getMessagesByChatId(chat._id)
+          .subscribe((messages: IMessage[]) => {
+            this.messagesHistory = messages;
+          })
+      })
 
     this.newIncoming.subscribe(data => {
       this.incomingMessage(data);
