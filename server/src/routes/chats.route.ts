@@ -29,6 +29,26 @@ chatsRouter.get('/:id', Middlewares.auth, async(req: express.Request, res: expre
 	}
 });
 
+chatsRouter.get('/:id/messages',  Middlewares.auth, async(req: express.Request, res: express.Response) => {
+	try {
+
+		const chat = await Services.chatService.getChatById(req.params.id);
+		
+		if (!chat) {
+			throw new Error('Chat is not definded');
+		}
+
+		if (req.query.length) {
+			res.send( chat.messages.slice(-req.query.length) );
+		} else {
+			res.send(chat.messages);
+		}
+
+	} catch (error) {
+		res.status(404).send(error.message);
+	}
+})
+
 chatsRouter.post('/createNew', Middlewares.auth, Middlewares.chat, async(req: express.Request, res: express.Response) => {
 	const newChat = await Services.chatService.getChatById(req.body.chatId);
 	res.send(newChat);
