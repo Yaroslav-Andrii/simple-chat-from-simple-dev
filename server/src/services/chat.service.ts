@@ -110,13 +110,18 @@ export async function getUserChats(chatsList: string[]): Promise<IChat[]> {
 }
 
 export async function joinUser(userId: string, chatId: string): Promise<void> {
+	
 	const chat: any = await ChatModel.findById(chatId);
-	chat.users.push(userId);
-	const listOfUsers = chat.users;
+	
+	const listOfUsers: string[] = chat.users;
+	listOfUsers.push(userId);
 
-	ChatModel.findByIdAndUpdate(chatId, { users: listOfUsers }, err => {
-		if (err) {
-			console.error(err);
-		}
-	});
+	if ( !chat.users.includes((value: string) => value === userId) ) {
+
+		ChatModel.findByIdAndUpdate(chatId, { users: listOfUsers }, err => {
+			if (err) {
+				console.error(err);
+			}
+		});
+	}
 }
