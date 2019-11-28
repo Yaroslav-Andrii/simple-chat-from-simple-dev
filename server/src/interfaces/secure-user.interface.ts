@@ -6,5 +6,5 @@ export default interface ISecureUser {
 	name: string;
 	avatar: string;
 	friends: IFriend[];
-	chats: Chat[];
+	chats: string[];
 }
