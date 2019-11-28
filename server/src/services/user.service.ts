@@ -40,12 +40,16 @@ export function getAll() {
 export async function joinChat(chatId: string, userId: string): Promise<void> {
 	
 	const user: any = await UserModel.findById(userId);
-	user.chats.push(chatId);
-	const listOfChats = user.chats;
-	
-	UserModel.findByIdAndUpdate(userId, { chats: listOfChats }, err => {
-		if (err) {
-			console.error(err);
-		}
-	});
+
+	if ( !user.chats.includes((value: string) => value === chatId) ) {
+
+		const listOfChats: string[] = user.chats;
+		listOfChats.push(chatId);
+		
+		UserModel.findByIdAndUpdate(userId, { chats: listOfChats }, err => {
+			if (err) {
+				console.error(err);
+			}
+		});
+	}
 }
