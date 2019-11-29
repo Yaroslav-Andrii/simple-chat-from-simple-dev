@@ -63,7 +63,7 @@
 		display: flex;
 		align-items: center;
 
-		box-shadow: 0 0 8px 2px grey;
+		box-shadow: 0 -2px 8px 0 grey;
 
 		textarea{
 			color: black;
@@ -89,8 +89,13 @@
 			border-radius: 50%;
 			cursor: pointer;
 		
-			&:hover, &:focus {
+			&:hover:not(:disabled), &:focus:not(:disabled){
 				box-shadow: 0px 0px 0px 4px #d8d8d883;
+			}
+
+			&:disabled {
+				background-color: rgb(194, 192, 192);
+				box-shadow: 0px 0px 2px 4px #2e2b2bd8;
 			}
 		}
 	}

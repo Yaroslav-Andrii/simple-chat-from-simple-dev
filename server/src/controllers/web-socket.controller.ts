@@ -44,24 +44,36 @@ export function connection(socket: socketIo.Socket) {
 				throw new Error("User not definded")
 			}
 			await setConnection(socket, user, chatId);
+			console.log(onlineChats.get(chatId));
+			socket.emit('joined', true);
 
 		} catch (error) {
-			console.error(error.message);
+			console.error(error);
 		}
 	})
 
 	socket.on('message', (message: IMessage, chatId: string) => {
-
-		const chat: IOnlineChat = <IOnlineChat>onlineChats.get(chatId);
+		try {
+			console.log('message', message);
+			
+			const chat: IOnlineChat = <IOnlineChat>onlineChats.get(chatId);
 		
-		chat.buffer.push(message);		
+			if (!chat) {
+				throw new Error('chat is not defined')
+			}
+		
+			chat.buffer.push(message);		
 
-		if (chat.buffer.length >= 100) {
-			Services.chatService.pushMessages(chat.buffer, chatId);
-			chat.buffer = [];
+			if (chat.buffer.length >= 100) {
+				Services.chatService.pushMessages(chat.buffer, chatId);
+				chat.buffer = [];
+			}
+			
+			socket.broadcast.emit('incoming', message, chatId);
+
+		} catch (error) {
+			console.error(error);	
 		}
-		
-		socket.broadcast.emit('incoming', message, chatId);
 	})
 }
 
@@ -85,11 +97,13 @@ async function setConnection(socket: socketIo.Socket, user: ISecureUser, chatId:
 			onlineUsers.delete(socket.id);
 			onlineUsers.set(socket.id, freshUser);
 
-			// Refresh chat data
-			const freshChat = await Services.chatService.getChatById(chatId);
-			const onlienChat: IOnlineChat = <IOnlineChat>onlineChats.get(chatId); // PPP
+			// If chat initializated Refresh chat data
+			if ( onlineChats.has(chatId) ) {
+				const freshChat = await Services.chatService.getChatById(chatId);
+				const onlienChat: IOnlineChat = <IOnlineChat>onlineChats.get(chatId);
 
-			onlienChat.chat = freshChat;
+				onlienChat.chat = freshChat;
+			}
 		}
 
 		if ( onlineChats.has(chatId) ) {
@@ -114,10 +128,12 @@ async function setConnection(socket: socketIo.Socket, user: ISecureUser, chatId:
 				usersOnline: [ user as ISecureUser ],
 				chat: await Services.chatService.getChatById(chatId),
 			})
+
+			socket.emit('connected', true);
 		}
 
 	} catch (error) {
-		console.log(error.message);
+		console.log(error);
 	}
 }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import IMessage from '../../interfaces/message.interface';
 import { ChatService } from '../../shared/chat.service';
 import { UserService } from 'src/app/shared/user.service';
@@ -14,21 +14,14 @@ export class MessengerFrameComponent implements OnInit {
   private messages: IMessage[] = [];
   private messagesHistory: IMessage[] = [];
   private activeChat: IChat;
+  private chatJoined: boolean = false;
+
   private messageText: string;
   private ownId: string;
+  private ownName: string;
+
   public status: boolean = true;
-
-  private newIncoming = this.chatService.incomingMessage;
-  private newActivated = this.chatService.chatActivated;
- 
   //private searchString = ''
-
-  private message: IMessage = {
-    date: new Date(),
-    senderId: this.ownId,
-    text: null,
-    rank: null,
-  };
 
   constructor(
     private userService: UserService,
@@ -36,12 +29,19 @@ export class MessengerFrameComponent implements OnInit {
   ) {
 
     this.ownId = this.userService.getOwnId();
-    this.message.senderId = this.ownId;
+    this.ownName = this.userService.getOwnName();
 
-    this.newActivated
+    this.chatService.chatJoined
+      .subscribe((flag: boolean) => {
+        this.chatJoined = flag;
+      })
+
+    this.chatService.chatActivated
       .subscribe((chat: IChat) => {
         this.messages = [];
         this.activeChat = chat;
+        
+        this.chatJoined = false;
         this.chatService.joinTo(chat._id);
 
         this.chatService.getMessagesByChatId(chat._id)
@@ -50,9 +50,10 @@ export class MessengerFrameComponent implements OnInit {
           })
       })
 
-    this.newIncoming.subscribe(data => {
-      this.incomingMessage(data);
-    })
+    this.chatService.incomingMessage
+      .subscribe(data => {
+        this.showMessage(data);
+      })
   }
 
   private findeMessage() {
@@ -63,29 +64,27 @@ export class MessengerFrameComponent implements OnInit {
     this.messages.push(message);
   }
 
-  private incomingMessage(message: IMessage) {
-    this.showMessage(message);
-  }
-
   private sendMessage() {
+
     event.preventDefault();
-    this.message.text = this.messageText;
-    this.chatService.send(this.message);
-    this.messageText = null;
 
-    this.showMessage({
-      date: this.message.date,
-      senderId: this.message.senderId,
-      text: this.message.text,
-      rank: this.message.rank,
-    });
-
-    this.message = {
+    // Create message object
+    const message: IMessage = {
       date: new Date(),
+      text: this.messageText,
       senderId: this.ownId,
-      text: null,
+      senderName: this.ownName,
       rank: null,
     }
+
+    // Send message
+    this.chatService.send(message);
+
+    // Show message in messenger frame
+    this.showMessage(message);
+
+    // Clear message text variable
+    this.messageText = null;
   }
 
   ngOnInit() {

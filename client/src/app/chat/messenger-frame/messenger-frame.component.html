@@ -1,6 +1,6 @@
 <div class="messenger">
 	<div class="header">
-		<div *ngIf="activeChat" class="info">
+		<div *ngIf="activeChat && chatJoined" class="info">
 			<div class="status">
 				<span class="interlocutor-name">{{activeChat.name}}</span><br>
 				<span class='online'  *ngIf='status'>online</span>
@@ -9,7 +9,7 @@
 			<!--<input (keydown.enter)="findeMessage()" type="text" placeholder="search in chat..." [(ngModel)]='searchString'>-->
 		</div>
 	</div>
-	<ul *ngIf="activeChat">
+	<ul *ngIf="activeChat && chatJoined">
 		<li *ngFor='let message of messagesHistory'>
 			<app-message [data]='message'></app-message>
 		</li>
@@ -18,10 +18,10 @@
 		</li>
 	</ul>
 	<div 
-		*ngIf="activeChat"
+		*ngIf="activeChat && chatJoined"
 		class="send-field"
 	>
 		<textarea [(ngModel)]='messageText' (keydown.enter)='sendMessage()' placeholder="Enter your message..." rows='1'></textarea>
-		<button (click)='sendMessage()'><img src="assets/1.png" width="38px"></button>
+		<button [disabled]='joined' (click)='sendMessage()'><img src="assets/1.png" width="38px"></button>
 	</div>
 </div>
