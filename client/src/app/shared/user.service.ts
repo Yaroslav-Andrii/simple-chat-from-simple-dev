@@ -22,4 +22,8 @@ export class UserService {
   public getOwnId(): string {
     return this.UserInfo.id;
   }
+
+  public getOwnName(): string {
+    return this.UserInfo.name;
+  }
 }
