@@ -10,7 +10,7 @@ export class SidebarHeaderComponent implements OnInit {
 
   @Output() searchParams: EventEmitter<ISearchParams> = new EventEmitter();
 
-  private flag: string = 'publics';
+  private flag: string = 'public';
   private searchString: string = '';
 
   constructor() { }
