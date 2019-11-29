@@ -3,5 +3,6 @@ export default interface IMessage {
 	senderId: string;
 	text: string;
 	rank: number;
+	senderName: string;
 }
 
