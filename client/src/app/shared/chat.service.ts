@@ -19,6 +19,7 @@ export class ChatService {
 
   public incomingMessage: EventEmitter<IMessage> = new EventEmitter();
   public chatActivated: EventEmitter<IChat> = new EventEmitter();
+  public chatJoined: EventEmitter<boolean> = new EventEmitter();
 
   constructor(
     private httpClient: HttpClient,
@@ -29,6 +30,10 @@ export class ChatService {
     // Connect to web socket
     this.socket = io(this.url);
     this.socket.emit('initializeUser', this.ownId);
+
+    this.socket.on('joined', flag => {
+      this.chatJoined.emit(flag);
+    })
 
     this.socket.on('incoming', (data: IMessage, chatId: string) => {
       if (this.currentChatId === chatId) {
