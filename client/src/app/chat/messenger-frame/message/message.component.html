@@ -1,8 +1,13 @@
 <div class="message" [class.own]="ownId === data.senderId">
-	<div class="text">
-		<p>{{data.text}}</p>
+	<div class="sender-name" *ngIf="ownId !== data.senderId">
+		{{data.senderName}}
 	</div>
-	<div class="date">
-		{{data.date | date: 'yyyy:MM:dd hh:mm'}}
+	<div>
+		<div class="text">
+			<p>{{data.text}}</p>
+		</div>
+		<div class="date">
+			{{data.date | date: 'yyyy:MM:dd hh:mm'}}
+		</div>
 	</div>
 </div>
