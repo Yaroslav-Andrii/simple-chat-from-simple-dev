@@ -1,7 +1,9 @@
 export default interface IUserFriend {
-	id: string;
+	_id: string;
 	name: string;
-	avatarUrl: string;
+	avatar?: string;
+	status: boolean;
+	chatId: string;
 	lastMessage: {
 		from: string;
 		text: string;
