@@ -1,11 +1,11 @@
 <ul class='list'>
 	<li 
-		*ngFor='let chat of getChatList(searchParams)' 
+		*ngFor='let link of getLinkList(searchParams)' 
 		
-		[class.active]='active === chat._id'
-		(click)='active = chat._id'
-		(click)='activate(chat._id)'
+		[class.active]='active === link._id'
+		(click)='active = link._id'
+		(click)='activate(link._id)'
 	>
-		<app-item [data]='chat'></app-item>
+		<app-item [data]='link'></app-item>
 	</li>
 </ul>

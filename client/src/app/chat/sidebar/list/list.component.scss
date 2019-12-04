@@ -7,6 +7,11 @@
 	li {
 		height: 60px;
 		padding: 0 15px;
+
+		&:hover {
+			background-color: #f0eeee;
+			box-shadow: 0px 4px 0px 0px #ebeaea83;
+		}
 		
 		&.active {
 			background-color: #d8d8d8;
