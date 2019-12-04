@@ -16,7 +16,7 @@ export async function getUserById(id: string): Promise<ISecureUser> {
 	}
 
 	return {
-		id: result._id,
+		_id: result._id,
 		name: result.name,
 		avatar: result.avatar,
 		friends: result.friends,

@@ -2,7 +2,7 @@ import IFriend from './friend.interface';
 import Chat from './chat.interface';
 
 export default interface ISecureUser {
-	id: string;
+	_id: string;
 	name: string;
 	avatar: string;
 	friends: IFriend[];

@@ -31,7 +31,7 @@ export async function getAllContacts(): Promise<IFriend[]> {
 	
 	for (let user of users) {
 		result.push({
-			id: user._id,
+			_id: user._id,
 			name: user.name,
 			avatar: user.avatar,
 			chatId: user.chatId

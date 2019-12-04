@@ -88,11 +88,11 @@ async function setConnection(socket: socketIo.Socket, user: ISecureUser, chatId:
 
 		if ( !user.chats.find(chat => chat === chatId) ) {
 			// Update user and chat info in database
-			await Services.userService.joinChat(chatId, user.id);
-			await Services.chatService.joinUser(user.id, chatId);
+			await Services.userService.joinChat(chatId, user._id);
+			await Services.chatService.joinUser(user._id, chatId);
 
 			// Refresh user data
-			const freshUser = await Services.userService.getUserById(user.id);
+			const freshUser = await Services.userService.getUserById(user._id);
 
 			onlineUsers.delete(socket.id);
 			onlineUsers.set(socket.id, freshUser);
@@ -110,7 +110,7 @@ async function setConnection(socket: socketIo.Socket, user: ISecureUser, chatId:
 
 			const onlineChat = onlineChats.get(chatId) as IOnlineChat;
 			
-			if ( !onlineChat.usersOnline.find(chatUser => chatUser.id === user.id) ) {
+			if ( !onlineChat.usersOnline.find(chatUser => chatUser._id === user._id) ) {
 
 				onlineChat.usersOnline.push(user as ISecureUser);
 				socket.join(chatId);
