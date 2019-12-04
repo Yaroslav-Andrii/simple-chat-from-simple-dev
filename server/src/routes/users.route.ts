@@ -6,8 +6,21 @@ import IFriend from '../interfaces/friend.interface';
 const contactRouter = express.Router();
 
 contactRouter.get('/',Middlewares.auth, async (req: express.Request, res: express.Response) => {
+
 	const userList: IFriend[] = await Services.chatService.getAllContacts();
-	res.send(userList);
+
+	if (req.query.searchString) {
+
+		res.send( 
+			userList.filter(user => {
+				return user.name.toLowerCase().includes( req.query.searchString.toLowerCase() );
+			})
+		);
+
+	} else {
+		res.send(userList);
+	}
+	
 });
 
 export default contactRouter;
