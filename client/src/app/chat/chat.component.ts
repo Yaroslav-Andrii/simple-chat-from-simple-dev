@@ -34,11 +34,10 @@ export class ChatComponent implements OnInit {
         catchError(this.handleError<IUser>())
       )
       .subscribe(data => {
-        if (!data)
-          return;
-
-        this.userService.initialUser(data);
-        this.userLoaded = true;
+        if (data) {
+          this.userService.initialUser(data);
+          this.userLoaded = true;
+        }
       });
   }
 
