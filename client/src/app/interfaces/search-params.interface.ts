@@ -1,4 +1,7 @@
+import IUserFriend from './user-friend.interface';
+
 export default interface ISearchParams {
-	flag: string;
+	type: string;
 	string: string;
+	deepResult: IUserFriend[];
 }
