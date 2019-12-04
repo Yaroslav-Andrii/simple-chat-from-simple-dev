@@ -1,7 +1,7 @@
 import IUserFriend from './user-friend.interface';
 
 export default interface IUser {
-	id: string;
+	_id: string;
 	name: string;
 	avatarUrl: string;
 	chats: [];
