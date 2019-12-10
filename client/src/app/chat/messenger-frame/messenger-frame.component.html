@@ -1,12 +1,12 @@
 <div class="messenger">
 	<div class="header">
+		<button  (click)='exitAlert()'>
+			Exit
+		</button>
 		<div *ngIf="activeChat && chatJoined" class="info">
 			<div class="status">
 				<span class="interlocutor-name">{{activeChat.name}}</span><br>
-				<span class='online'  *ngIf='status'>online</span>
-				<!--<span class='offline' *ngIf='!interlocutor.status'>offline</span> Will check by soocket-->
 			</div>
-			<!--<input (keydown.enter)="findeMessage()" type="text" placeholder="search in chat..." [(ngModel)]='searchString'>-->
 		</div>
 	</div>
 	<ul *ngIf="activeChat && chatJoined">
@@ -22,6 +22,6 @@
 		class="send-field"
 	>
 		<textarea [(ngModel)]='messageText' (keydown.enter)='sendMessage()' placeholder="Enter your message..." rows='1'></textarea>
-		<button [disabled]='joined' (click)='sendMessage()'><img src="assets/1.png" width="38px"></button>
+		<button [disabled]='joined' (click)='sendMessage()'>SEND</button>
 	</div>
 </div>
