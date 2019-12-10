@@ -9,14 +9,10 @@ import IChat from 'src/app/interfaces/chat.interface';
 })
 export class ItemComponent implements OnInit {
 
-  @Input() data: IChat;
+  @Input() data: IChat | IUserFriend;
 
-  constructor() {
-    
-  }
+  constructor() { }
 
-  ngOnInit() {
-    console.log(this.data);
-  }
+  ngOnInit() { }
 
 }
