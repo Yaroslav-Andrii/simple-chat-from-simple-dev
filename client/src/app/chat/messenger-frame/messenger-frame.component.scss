@@ -3,6 +3,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	position: relative;
 
 	& ul {
 		padding: 10px 0;
@@ -18,8 +19,6 @@
 		box-sizing: border-box;
 		min-height: 60px;
 		align-items: center;
-
-		
 		
 		align-items: center;
 		color: white;
@@ -42,17 +41,18 @@
 			color: rgba(255, 255, 255, 0.568);
 		}
 
-		input[type='text'] {
+		button {
+			float: right;
 			color: black;
 			box-sizing: border-box;
-			width: 150px;
 			height: 35px;
+			margin-top: 10px;
 			margin-right: 10px;
 			border-radius: 20px;
 			padding: 0 15px;
 			background-color: white;
 
-			&:focus {
+			&:hover {
 				box-shadow: 0px 0px 0px 4px rgba(255, 255, 255, 0.55);
 			}
 		}
@@ -82,11 +82,13 @@
 		}
 
 		button {
-			background-color: white;
-			width: 38px;
+			background-color: #007acc;
+			padding: 0 10px;
+			color: white;
 			margin-right: 15px;
 			height: 38px;
-			border-radius: 50%;
+			border-radius: 15px;
+			font-weight: bold;
 			cursor: pointer;
 		
 			&:hover:not(:disabled), &:focus:not(:disabled){
