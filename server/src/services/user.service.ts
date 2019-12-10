@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import UserModel from '../models/user.model';
 import IUser from '../interfaces/user.interface';
 import ISecureUser from '../interfaces/secure-user.interface';
@@ -29,7 +28,7 @@ export async function createUser(newUser: IUser): Promise<IUser> {
 	return result;
 }
 
-export function clear() {
+export function remove() {
 	return UserModel.remove({});
 }
 
@@ -51,5 +50,28 @@ export async function joinChat(chatId: string, userId: string): Promise<void> {
 				console.error(err);
 			}
 		});
+	}
+}
+
+export async function joinFriends(chatId: string, usersId: string[]): Promise<void> {
+	const users: any = await UserModel.find({_id: { $in: usersId }});
+
+	for (let user of users) {
+		for (let i = 0; i < users.length; i++) {
+			if (user._id !== users[i]._id) {
+
+				user.friends.push({
+					_id: users[i]._id,
+					name: users[i].name,
+					chatId,
+				})
+			}
+		}
+
+		await UserModel.findByIdAndUpdate(user._id, {friends: user.friends}, err => {
+			if (err) {
+				console.error(err);
+			}
+		})
 	}
 }
