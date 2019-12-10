@@ -1,7 +1,2 @@
-import * as socket from './web-socket.controller';
+export {connection as socketController} from './web-socket.controller';
 
-const Controllers = {
-	socket
-}
-
-export default Controllers

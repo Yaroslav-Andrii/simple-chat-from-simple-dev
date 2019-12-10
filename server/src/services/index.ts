@@ -1,9 +1,7 @@
 import * as userService from './user.service';
 import * as chatService from './chat.service';
 
-const Services = {
+export default {
 	userService,
 	chatService,
 };
-
-export default Services;
