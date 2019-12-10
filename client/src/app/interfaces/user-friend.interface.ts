@@ -4,8 +4,4 @@ export default interface IUserFriend {
 	avatar?: string;
 	status: boolean;
 	chatId: string;
-	lastMessage: {
-		from: string;
-		text: string;
-	}
 }
