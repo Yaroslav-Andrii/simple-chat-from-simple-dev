@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/app.js",
-    "startDB": "mongod",
     "build": "tsc",
     "devCompile": "tsc -w",
-    "devServer": "nodemon dist/app.js cross"
+    "devServer": "nodemon dist/app.js cors"
   },
   "author": "Yaroslav-Andrii",
   "license": "ISC",
