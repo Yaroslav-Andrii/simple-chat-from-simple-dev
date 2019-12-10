@@ -3,9 +3,9 @@ import Services from '../services';
 import Middlewares from '../middlewares';
 import IFriend from '../interfaces/friend.interface';
 
-const contactRouter = express.Router();
+const userRouter = express.Router();
 
-contactRouter.get('/',Middlewares.auth, async (req: express.Request, res: express.Response) => {
+userRouter.get('/',Middlewares.auth, async (req: express.Request, res: express.Response) => {
 
 	const userList: IFriend[] = await Services.chatService.getAllContacts();
 
@@ -23,4 +23,4 @@ contactRouter.get('/',Middlewares.auth, async (req: express.Request, res: expres
 	
 });
 
-export default contactRouter;
+export default userRouter;
