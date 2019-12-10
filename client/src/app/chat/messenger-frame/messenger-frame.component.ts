@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import IMessage from '../../interfaces/message.interface';
 import { ChatService } from '../../shared/chat.service';
 import { UserService } from 'src/app/shared/user.service';
 import IChat from 'src/app/interfaces/chat.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-messenger-frame',
@@ -20,14 +21,11 @@ export class MessengerFrameComponent implements OnInit {
   private ownId: string;
   private ownName: string;
 
-  public status: boolean = true;
-  //private searchString = ''
-
   constructor(
     private userService: UserService,
     private chatService: ChatService,
+    private _router: Router,
   ) {
-
     this.ownId = this.userService.getOwnId();
     this.ownName = this.userService.getOwnName();
 
@@ -56,10 +54,6 @@ export class MessengerFrameComponent implements OnInit {
       })
   }
 
-  private findeMessage() {
-    /* TODO */
-  }
-
   private showMessage(message: IMessage) {
     this.messages.push(message);
   }
@@ -85,6 +79,13 @@ export class MessengerFrameComponent implements OnInit {
 
     // Clear message text variable
     this.messageText = null;
+  }
+
+  private exitAlert() {
+    if (confirm("Are you sure that you want to leave us?")) {
+      localStorage.clear();
+      this._router.navigate(['/login']);
+    }
   }
 
   ngOnInit() {
