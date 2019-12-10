@@ -24,11 +24,11 @@ export class AuthService {
   }
 
   public registerRequest(body: IRegisterBody): Observable<HttpResponse<IUser>> {
-    return this.httpClient.post<IUser>(this.registerUrl, body, { observe: 'response' })
+    return this.httpClient.post<IUser>(this.registerUrl, body, { observe: 'response' });
   }
 
   public loginRequest(body: ILoginBody): Observable<HttpResponse<IUser>> {
-    return this.httpClient.post<IUser>(this.loginUrl, body, { observe: 'response' })
+    return this.httpClient.post<IUser>(this.loginUrl, body, { observe: 'response' });
   }
 
   public getUser(): Observable<IUser> {
