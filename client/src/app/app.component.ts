@@ -12,7 +12,7 @@ export class AppComponent{
     this.authorization();
   }
 
-  private async authorization(): Promise<void> {
+  private authorization() {
     
     if (!localStorage.getItem('_access_token')) {
       this._router.navigate(['/login']);
