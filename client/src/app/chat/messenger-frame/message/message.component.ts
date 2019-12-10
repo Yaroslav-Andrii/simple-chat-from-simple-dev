@@ -11,14 +11,13 @@ export class MessageComponent implements OnInit {
 
   @Input() data: IMessage;
 
-  private ownId; // Get from somoewere
+  private ownId: string; 
 
   constructor(private userService: UserService) {
     this.ownId = this.userService.getOwnId();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }
 
