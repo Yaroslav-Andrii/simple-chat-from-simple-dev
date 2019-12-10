@@ -44,7 +44,6 @@ export function connection(socket: socketIo.Socket) {
 				throw new Error("User not definded")
 			}
 			await setConnection(socket, user, chatId);
-			console.log(onlineChats.get(chatId));
 			socket.emit('joined', true);
 
 		} catch (error) {
@@ -54,8 +53,7 @@ export function connection(socket: socketIo.Socket) {
 
 	socket.on('message', (message: IMessage, chatId: string) => {
 		try {
-			console.log('message', message);
-			
+
 			const chat: IOnlineChat = <IOnlineChat>onlineChats.get(chatId);
 		
 			if (!chat) {
